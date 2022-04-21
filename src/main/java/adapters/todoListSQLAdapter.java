@@ -17,7 +17,7 @@ public class todoListSQLAdapter extends SqlInterface {
     private static final String USERNAME = "root";
     private static final String PASSWORD = "demo";
     private static final String MAX_POOL = "250";
-    private static final String DATABASEURL = "jdbc:sqlite:/Users/toni.robres/Downloads/blog-code/docker-flask-mariadb-todo-list-from-scratch/demo_webservice/example.db";
+    private static final String DATABASEURL = "jdbc:sqlite:/home/nexoqa/repos/nexoqa_training_eng_adv_to_do_task/example.db";
     taskModel task = null;
 
     public todoListSQLAdapter() {
