@@ -2,6 +2,7 @@ package adapters;
 
 import interfaces.SqlInterface;
 import model.taskModel;
+import model.taskResponseModel;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +19,7 @@ public class todoListSQLAdapter extends SqlInterface {
     private static final String PASSWORD = "demo";
     private static final String MAX_POOL = "250";
     private static final String DATABASEURL = "jdbc:sqlite:/home/nexoqa/repos/nexoqa_training_eng_adv_to_do_task/example.db";
+
     taskModel task = null;
 
     public todoListSQLAdapter() {
@@ -37,6 +39,19 @@ public class todoListSQLAdapter extends SqlInterface {
             this.task = new taskModel(rs.getString(2), rs.getString(3));
         }
         return this.task;
+    }
+
+    public taskResponseModel getTaskByTitle(String title) throws SQLException{ 
+        taskResponseModel myTask = new taskResponseModel();
+        String getTaskQuery = "SELECT * from todo_list WHERE TITLE = '" + title + "'";
+        ResultSet rs = super.sendQuery(getTaskQuery);
+        while (rs.next()) {
+            myTask.setId(rs.getString(1));
+            myTask.setTittle(rs.getString(2));
+            myTask.setDescription(rs.getString(3));
+            myTask.setIsDone(rs.getBoolean(4));
+        }
+        return myTask;
     }
 
     public ArrayList<taskModel> getAllTasks() throws SQLException{
