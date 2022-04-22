@@ -19,7 +19,7 @@ public class todoListSQLAdapter extends SqlInterface {
     private static final String PASSWORD = "demo";
     private static final String MAX_POOL = "250";
     private static final String DATABASEURL = "jdbc:sqlite:/home/nexoqa/repos/nexoqa_training_eng_adv_to_do_task/example.db";
-
+    
     taskModel task = null;
 
     public todoListSQLAdapter() {
@@ -41,7 +41,7 @@ public class todoListSQLAdapter extends SqlInterface {
         return this.task;
     }
 
-    public taskResponseModel getTaskByTitle(String title) throws SQLException{ 
+    public taskResponseModel getTaskByTitle(String title) throws SQLException {
         taskResponseModel myTask = new taskResponseModel();
         String getTaskQuery = "SELECT * from todo_list WHERE TITLE = '" + title + "'";
         ResultSet rs = super.sendQuery(getTaskQuery);
@@ -53,6 +53,20 @@ public class todoListSQLAdapter extends SqlInterface {
         }
         return myTask;
     }
+    
+    public ArrayList<taskResponseModel> getAllTasksWithIsDone() throws SQLException{
+        ArrayList<taskResponseModel> taskList = new ArrayList<taskResponseModel>();
+        String getTaskQuery = "SELECT * from todo_list";
+        ResultSet rs = super.sendQuery(getTaskQuery);
+        while (rs.next()){
+            taskResponseModel task = new taskResponseModel();
+            task.setId(rs.getString(1));
+            task.setIsDone(rs.getInt(6) == 1);
+            taskList.add(task);
+        }
+        return taskList;
+    }
+
 
     public ArrayList<taskModel> getAllTasks() throws SQLException{
         ArrayList<taskModel> taskList = new ArrayList<taskModel>();
