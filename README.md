@@ -1,8 +1,8 @@
 # java-project-architecture
 Project in Java with Ports Adapters architecture
 
-# Ejercicio
-El servicio TO DO TASK tiene los siguientes enpoints definidos:
+# Excercise
+The service TO DO TASK has the following endpoints defined:
 
 - GET /todo
 - GET /todo/<int:todo_id>
@@ -11,10 +11,10 @@ El servicio TO DO TASK tiene los siguientes enpoints definidos:
 - GET /todo/<int:todo_id>/check
 - GET todo/<int:todo_id>/uncheck
 
-## Reglas:
+## Rules:
 
-- Cuando se crea una tarea por medio del servicio, por defecto la tarea esta en estado 'uncheck'
-- Cuando se crea o actualiza una tarea el endpoint nos devuelve un objecto con la siguiente estructura
+- When a task is created, the task is mark as 'uncheck' by default
+- When a task is created or updated the endpoints response a object with the following structure
 ```JSON
 {
     "id": 1,
@@ -23,14 +23,14 @@ El servicio TO DO TASK tiene los siguientes enpoints definidos:
     "is_done": false
 }
 ```
-- Cuando se actualiza una tarea, solo se puede modificar el titulo y la descripción
+- When a task is updated, you can only change the title and description
 
-## Pruebas a implementar:
+## Tests to implement:
 
-- Validar que la actualización de una tarea sea realice satisfactoriamente
-- Validar que 2 tareas pueden tener el mismo titulo y/o descripción
-- Marcar todas las tareas preexistentes como terminadas y validar que se hayan actualizado correctamente
-- Marcar todas las tareas preexistentes como no terminadas y validar que se hayan actualizado correctamente
+- Validate the update of a task is carried out satisfactorily
+- Validate two tasks can have the same title and/or description
+- Mark all pre-existing tasks as finished and validate that they have been updated correctly
+- Mark all pre-existing tasks as not finished and validate that they have been updated correctly
 
 
 
