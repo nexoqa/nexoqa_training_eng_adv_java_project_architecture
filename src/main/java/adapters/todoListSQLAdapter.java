@@ -17,7 +17,7 @@ public class todoListSQLAdapter extends SqlInterface {
     private static final String USERNAME = "root";
     private static final String PASSWORD = "demo";
     private static final String MAX_POOL = "250";
-    private static final String DATABASEURL = "jdbc:sqlite:/home/nexoqa/repos/nexoqa_training_eng_adv_to_do_task/example.db";
+    private static final String DATABASEURL = "jdbc:sqlite:/Users/yc00043/nexoqa/eng_adv/nexoqa_training_eng_adv_to_do_task/example.db";
     taskModel task = null;
 
     public todoListSQLAdapter() {
@@ -56,13 +56,13 @@ public class todoListSQLAdapter extends SqlInterface {
         super.sendUpdate(deleteAllTasksQuery);
     }
 
-    public void createTask(String tittle, String description, Timestamp timestamp) throws SQLException{
-        LOGGER.info("Creating tasks with title: " + tittle + " and description: " + description);
+    public void createTask(String title, String description, Timestamp timestamp) throws SQLException{
+        LOGGER.info("Creating tasks with title: " + title + " and description: " + description);
 
         String createTaskQuery = "INSERT INTO todo_list(title, description, created_at) VALUES (?, ?, ?)";
 
         PreparedStatement statement = super.connect().prepareStatement(createTaskQuery);
-        statement.setString(1, tittle);
+        statement.setString(1, title);
         statement.setString(2, description);
         statement.setTimestamp(3, timestamp);
 

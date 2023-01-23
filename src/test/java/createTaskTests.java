@@ -34,10 +34,8 @@ public class createTaskTests {
     @Test
     public void createTask() throws SQLException{
         String description = "Test Description";
-        String tittle = "Test Tittle";
-        String id = "50";
-        Boolean isDone = false;
-        createTaskRequestModel task = new createTaskRequestModel(description, tittle);
+        String title = "Test title";
+        createTaskRequestModel task = new createTaskRequestModel(description, title);
 
         taskResponseModel obtainedTask = given().
                 contentType(ContentType.JSON).
@@ -47,12 +45,12 @@ public class createTaskTests {
                 post("http://localhost:5001/todo").
                 as(taskResponseModel.class);
 
-        Assertions.assertEquals(obtainedTask.getTittle(), task.getTittle());
+        Assertions.assertEquals(obtainedTask.getTitle(), task.getTitle());
         Assertions.assertEquals(obtainedTask.getDescription(), task.getDescription());
 
         taskModel taskPersistance = todoListAdapter.getTask(obtainedTask.getId());
 
-        Assertions.assertEquals(taskPersistance.getTittle(), task.getTittle());
+        Assertions.assertEquals(taskPersistance.getTitle(), task.getTitle());
         Assertions.assertEquals(taskPersistance.getDescription(), task.getDescription());
     }
 

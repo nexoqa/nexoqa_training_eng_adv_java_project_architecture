@@ -3,10 +3,15 @@ import interfaces.basicResponses;
 import logger.LogUtils;
 import model.taskModel;
 import model.taskResponseModel;
+
+import org.junit.After;
+import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.runners.MethodSorters;
+
 import useCases.createTasks;
 
 import java.io.IOException;
@@ -18,6 +23,7 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 
+@FixMethodOrder(MethodSorters.JVM)
 public class getAllTasksTests {
 
     private final basicResponses toListResponsesObject = new basicResponses();
@@ -25,6 +31,7 @@ public class getAllTasksTests {
 
     @BeforeAll
     @AfterAll
+    @After
     public static void clean() throws SQLException {
 
         todoListAdapter.deleteAllTasks();
@@ -37,8 +44,7 @@ public class getAllTasksTests {
     }
 
     @Test
-    public void getAllTasksBasicTest() {
-
+    public void getAllTasksBasicTest() throws SQLException {
         given().
                 when().
                 get("http://localhost:5001/todo").
@@ -47,7 +53,7 @@ public class getAllTasksTests {
     }
 
     @Test
-    public void validateAllTasksFormat(){
+    public void validateAllTasksFormat() throws SQLException{
         taskResponseModel[] taskResponse = given().
                 when().
                 get("http://localhost:5001/todo").
@@ -59,8 +65,6 @@ public class getAllTasksTests {
 
     @Test
     public void getAllTasksWithNoTasksCreated () throws SQLException {
-
-        todoListAdapter.deleteAllTasks();
         given().
                 when().
                 get("http://localhost:5001/todo").
@@ -69,14 +73,13 @@ public class getAllTasksTests {
 
     @Test
     public void getAllTasks() throws SQLException{
-
         Integer numItems = 10;
-        todoListAdapter.deleteAllTasks();
         createTasks taskCreatorUserCase = new createTasks();
         List<taskModel> tasks = taskCreatorUserCase.createSeveralTasks(numItems);
         given().
                 when().
                 get("http://localhost:5001/todo").
-                then().body("", hasSize(numItems));
+                then().body("", hasSize(tasks.size()));
+        todoListAdapter.deleteAllTasks();
     }
 }

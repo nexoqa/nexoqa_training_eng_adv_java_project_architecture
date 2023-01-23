@@ -66,7 +66,8 @@ public class SqlInterface  {
 
         this.connection = this.connect();
         Statement stmt =this.connection.createStatement();
-        return stmt.executeQuery(query);
+        ResultSet result = stmt.executeQuery(query);
+        return result;
     }
 
     public void sendUpdate(String query) throws SQLException{
@@ -79,6 +80,7 @@ public class SqlInterface  {
         try{
             this.connection = this.connect();
             statement.executeUpdate();
+            this.disconnect();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

@@ -3,7 +3,6 @@ package model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import sun.font.TrueTypeFont;
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -13,7 +12,7 @@ public class taskResponseModel {
     private String description;
     private String id;
     private Boolean isDone;
-    private String tittle;
+    private String title;
 
     public taskResponseModel () {
 
@@ -50,18 +49,18 @@ public class taskResponseModel {
     }
 
     @JsonProperty("title")
-    public String getTittle() {
-        return tittle;
+    public String getTitle() {
+        return title;
     }
 
     @JsonProperty("title")
-    public void setTittle(String tittle) {
-        this.tittle = tittle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public boolean isNotNull(){
 
-        if(this.tittle == null || this.tittle.trim().isEmpty()){
+        if(this.title == null || this.title.trim().isEmpty()){
             return true;
         }
         if(this.isDone == null){

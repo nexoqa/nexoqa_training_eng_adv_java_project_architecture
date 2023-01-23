@@ -28,7 +28,7 @@ public class main {
         ArrayList<taskModel> taskList = todoListAdapter.getAllTasks();
         for (taskModel taskObject:taskList)
         {
-            System.out.println(taskObject.getTittle()+"  "+taskObject.getDescription());
+            System.out.println(taskObject.getTitle()+"  "+taskObject.getDescription());
         }
         todoListAdapter.deleteAllTasks();
 
